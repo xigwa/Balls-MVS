@@ -28,17 +28,14 @@ public class GameController implements MouseListener {
         frame.setResizable(false);
         frame.setLayout(null);
 
-        // Создание барьеров
         barriers.add(new Barrier(100, 100, 100, 20, Color.BLUE));
         barriers.add(new Barrier(300, 200, 20, 100, Color.GREEN));
         barriers.add(new Barrier(500, 400, 150, 20, Color.YELLOW));
 
-        // Создание представления игры
         gameView = new GameView(balls, barriers);
         gameView.setBounds(0, 0, 800, 600);
         frame.add(gameView);
 
-        // Добавление JLabel для отображения счета
         scoreLabel.setFont(new Font("Arial", Font.BOLD, 20));
         scoreLabel.setForeground(Color.BLACK);
         scoreLabel.setBounds(650, 10, 150, 30);
@@ -47,7 +44,6 @@ public class GameController implements MouseListener {
         frame.setVisible(true);
         frame.addMouseListener(this);
 
-        // Запускаем игровой поток
         new GameThread().start();
     }
 
@@ -79,7 +75,7 @@ public class GameController implements MouseListener {
         }
 
         if (!validPositionFound) {
-            System.out.println("Не удалось найти свободное место для изображения после " + maxAttempts + " попыток.");
+            System.out.println("Не вдалося знайти вільне місце для зображення після " + maxAttempts + " спроб.");
         }
     }
 
@@ -117,33 +113,29 @@ public class GameController implements MouseListener {
                 for (Ball ball : balls) {
                     ball.move();
 
-                    // Проверка на пересечение с границами окна (JFrame)
-                    if (ball.getX() <= 0 || ball.getX() + ball.getRad() >= gameView.getWidth()) {
-                        ball.setxStep(-ball.getxStep());  // Отразить по оси X
-                    }
-                    if (ball.getY() <= 0 || ball.getY() + ball.getRad() >= gameView.getHeight()) {
-                        ball.setyStep(-ball.getyStep());  // Отразить по оси Y
-                    }
+                    if (ball.getX() <= 0 || ball.getX() + ball.getRad() >= gameView.getWidth())
+                        ball.setxStep(-ball.getxStep());
+                    if (ball.getY() <= 0 || ball.getY() + ball.getRad() >= gameView.getHeight())
+                        ball.setyStep(-ball.getyStep());
 
-                    // Проверка на пересечение с барьерами
+
                     for (Barrier barrier : barriers) {
                         Rectangle ballBounds = new Rectangle(ball.getX(), ball.getY(), ball.getRad(), ball.getRad());
 
                         if (ballBounds.intersects(barrier.getBounds())) {
-                            barrier.reduceNumber();  // Уменьшить число на барьере
+                            barrier.reduceNumber();
                             score++;
                             updateScore();
                             moveImageToRandomPosition();
 
-                            // Отражение мяча при столкновении с барьером
                             if (ballBounds.intersectsLine(barrier.getBounds().getMinX(), barrier.getBounds().getMinY(), barrier.getBounds().getMinX(), barrier.getBounds().getMaxY()) ||
                                     ballBounds.intersectsLine(barrier.getBounds().getMaxX(), barrier.getBounds().getMinY(), barrier.getBounds().getMaxX(), barrier.getBounds().getMaxY())) {
-                                ball.setxStep(-ball.getxStep());  // Отразить по оси X
+                                ball.setxStep(-ball.getxStep());
                             }
 
                             if (ballBounds.intersectsLine(barrier.getBounds().getMinX(), barrier.getBounds().getMinY(), barrier.getBounds().getMaxX(), barrier.getBounds().getMinY()) ||
                                     ballBounds.intersectsLine(barrier.getBounds().getMinX(), barrier.getBounds().getMaxY(), barrier.getBounds().getMaxX(), barrier.getBounds().getMaxY())) {
-                                ball.setyStep(-ball.getyStep());  // Отразить по оси Y
+                                ball.setyStep(-ball.getyStep());
                             }
                         }
                     }

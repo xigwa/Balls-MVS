@@ -47,25 +47,18 @@ public class GameView extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
-        // Рисуем фон
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        // Рисуем изображение
-        if (image != null) {
+
+        if (image != null)
             g.drawImage(image, imageX, imageY, null);
-        }
 
-        // Рисуем барьеры
-        for (Barrier barrier : barriers) {
+        for (Barrier barrier : barriers)
             barrier.draw(g);
-        }
 
-        // Рисуем мячики
-        for (Ball ball : balls) {
+        for (Ball ball : balls)
             ball.draw(g);
-        }
     }
 
     public BufferedImage getImage() {
@@ -79,11 +72,9 @@ public class GameView extends JPanel {
     public int getImageY() {
         return imageY;
     }
-
     public int getImageWidth() {
         return image.getWidth();
     }
-
     public int getImageHeight() {
         return image.getHeight();
     }

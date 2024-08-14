@@ -35,10 +35,9 @@ public class Barrier {
         number--;
         if (number <= 0) {
             moveToRandomPosition();
-            number = random.nextInt(14) + 2; // Случайное число от 2 до 15
+            number = random.nextInt(14) + 2;
         }
     }
-
     private void moveToRandomPosition() {
         x = random.nextInt(800 - width);
         y = random.nextInt(600 - height);
