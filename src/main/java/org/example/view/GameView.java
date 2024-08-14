@@ -22,7 +22,7 @@ public class GameView extends JPanel {
         this.barriers = barriers;
 
         try {
-            image = ImageIO.read(new File("src/main/resources/klipartz.com.png")); // путь к изображению
+            image = ImageIO.read(new File("src/main/resources/klipartz.com.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

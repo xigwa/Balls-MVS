@@ -17,7 +17,7 @@ public class Barrier {
         this.width = width;
         this.height = height;
         this.color = color;
-        this.number = random.nextInt(14) + 2; // Случайное число от 2 до 15
+        this.number = random.nextInt(14) + 2;
     }
 
     public Rectangle getBounds() {
